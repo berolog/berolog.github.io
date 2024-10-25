@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sylendor Minecraft Server</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1c1c1c, #2c2c2c, #3a3a3a);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+        }
+        header {
+            position: relative;
+			z-index: 1;
+			background-image: url('minecraft-banner.jpg');
+			background-size: cover;
+			background-position: center;
+			height: 350px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+        }
+        header h1 {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 3.5em;
+            color: #f0f0f0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .ip-server {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            background-color: rgba(0, 0, 0, 0.7); /* Темный фон */
+            padding: 10px 30px;
+            border-radius: 12px;
+            font-weight: bold;
+            color: #00ffff; /* Цвет текста Aqua */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Легкая тень для улучшения читабельности */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .ip-server:hover {
+            background-color: rgba(0, 0, 0, 0.85); /* Более темный фон при наведении */
+            transform: translateX(-50%) scale(1.05); /* Легкое увеличение при наведении */
+        }
+		main {
+			display: flex;
+			justify-content: space-between; /* Размещаем боковые блоки и контент */
+			padding: 40px;
+			flex-grow: 1;
+			max-width: 100%; /* Убираем фиксированную ширину */
+			margin: 0 auto;
+			text-align: center;
+		}
+		.content {
+			flex-grow: 1;
+			margin: 0 20px; /* Отступы для основного контента */
+		}
+        main h2 {
+            font-size: 2em;
+            color: #019BCA;
+            margin-bottom: 20px;
+        }
+        main .server-info-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+        main .server-info {
+            width: 48%; /* Два столбца по ширине */
+        }
+        .server-info div {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+            height: 110px; /* Фиксированная высота для блоков */
+            overflow: auto; /* Добавляем прокрутку, если текста слишком много */
+        }
+		.cta-discord {
+            background-color: #5865F2;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Плавные переходы */
+        }
+        .cta-discord:hover {
+            background-color: #4752c4; /* Темнее при наведении */
+            transform: scale(1.05); /* Легкое увеличение при наведении */
+        }
+        footer {
+			display: flex;
+			flex-direction: column; /* Разделяем футер на вертикальные блоки */
+			align-items: center;
+			justify-content: space-between;
+			background: linear-gradient(135deg, #0e0e0e, #1a1a1a);
+			padding: 20px;
+			width: 100%;
+			position: relative;
+			z-index: 1;
+			bottom: 0;
+		}
+		.footer-text {
+			text-align: center;
+			color: #aaa;
+			font-size: 1em;
+		}
+        footer p {
+            margin: 0;
+            font-size: 1em;
+            color: #aaa;
+        }
+        .vote-section {
+			margin-top: 30px; /* Отступ сверху */
+			text-align: center; /* Центрируем заголовок */
+		}
+
+		.vote-section h3 {
+			font-size: 1.5em;
+			color: #019BCA; /* Цвет заголовка для голосования */
+			margin-bottom: 20px;
+		}
+
+		.vote-section-container {
+			display: flex; /* Располагаем элементы в строку */
+			justify-content: center; /* Центрируем их по горизонтали */
+			gap: 30px; /* Отступ между кнопками */
+		}
+        .vote-section div {
+            text-align: center;
+        }
+        .vote-section img {
+            width: 88px;
+            height: 31px;
+        }
+		/* Мобильные устройства - экраны меньше 600px */
+		@media (max-width: 600px) {
+			header h1 {
+				font-size: 2em; /* Уменьшаем размер шрифта для заголовка */
+				padding: 10px;  /* Уменьшаем отступы */
+			}
+
+			.ip-server {
+				font-size: 1.2em; /* Уменьшаем размер шрифта для IP */
+				padding: 8px 20px; /* Уменьшаем отступы */
+			}
+
+			.server-info-wrapper {
+				flex-direction: column; /* Блоки информации располагаем в колонку */
+				align-items: center; /* Центрируем блоки */
+			}
+
+			.server-info {
+				width: 100%; /* Блоки будут занимать всю ширину на мобильных устройствах */
+				margin-bottom: 20px;
+				text-align: center; /* Центрируем текст */
+			}
+			.server-info div {
+				width: 90%; /* Добавляем отступы по бокам для более аккуратного вида */
+			}
+		}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать на Sylendor!</h1>
+        <div class="ip-server">IP сервера: mc.sylendor.com</div>
+    </header>
+    <main>
+		<!-- Основной контент -->
+        <div class="content">
+			<h2>Что вас ждёт на нашем сервере:</h2>
+			<hr>
+			<p></p>
+			<div class="server-info-wrapper">
+				<!-- Левая колонка -->
+				<div class="server-info">
+					<div>
+						<strong>Минимум плагинов, максимум оригинальности:</strong>
+						<p>Мы используем минимальное количество плагинов, чтобы сохранить аутентичный дух ванильного Minecraft. Все ключевые механики разработаны вручную.</p>
+					</div>
+					<div>
+						<strong>Без телепортаций и сетхомов:</strong>
+						<p>На нашем сервере нет телепортаций и сетхомов. Исследуйте мир на полную, прокладывайте собственные пути и делайте каждое путешествие значимым.</p>
+					</div>
+					<div>
+						<strong>Система приватизации:</strong>
+						<p>Уникальная система защиты территорий. Установите флаг, и вокруг него будет создана зона привата без сложных команд.</p>
+					</div>
+					<div>
+						<strong>PvE с возможностью дуэлей:</strong>
+						<p>Наш сервер ориентирован на PvE-игру, однако для тех, кто любит соревноваться, есть система дуэлей.</p>
+					</div>
+					<div>
+						<strong>Вечный Город – сердце вашего приключения:</strong>
+						<p>Вечный Город — это хаб для торговли и взаимодействия с NPC.</p>
+					</div>
+				</div>
+				<!-- Правая колонка -->
+				<div class="server-info">
+					<div>
+						<strong>Стартовая цепочка квестов:</strong>
+						<p>Для нового игрока подготовлена увлекательная стартовая цепочка квестов.</p>
+					</div>
+					<div>
+						<strong>Экономика и профессии:</strong>
+						<p>Сервер обладает собственной экономикой и уникальной валютой, с возможностью выбрать профессию и продавать свои товары.</p>
+					</div>
+					<div>
+						<strong>Чистая ваниль:</strong>
+						<p>Мы сохраняем всю красоту классического Minecraft.</p>
+					</div>
+					<div>
+						<strong>Постоянное развитие:</strong>
+						<p>Сервер находится в разработке, и новые механики будут добавляться со временем.</p>
+					</div>
+					<div>
+						<strong>Только лицензия:</strong>
+						<p>Сервер доступен только для лицензионных аккаунтов Minecraft.</p>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<p><strong>Присоединяйтесь к нам!</strong></p>
+			<p>Играйте на сервере Sylendor, где уникальные механики встречаются с классическим Minecraft. Мы ждем вас в нашем сообществе!</p>
+			<a href="https://discord.gg/fP5AtvHtN8" class="cta-discord" onclick="window.open('https://discord.gg/fP5AtvHtN8'); return false;">Присоединиться к Discord</a>
+			<p></p>
+			<hr>
+			<div class="vote-section">
+				<h3>Голосуйте за нас на мониторингах:</h3>
+				<div class="vote-section-container">
+					<div>
+						<p>MinecraftRating:</p>
+						<a href="https://minecraftrating.ru/vote/97189/" onclick="window.open('https://minecraftrating.ru/vote/97189/'); return false;">
+							<img src="widget_vote.png" alt="Голосовать за сервер Sylendor" title="Голосовать за сервер Sylendor" />
+						</a>
+					</div>
+					<div>
+						<p>HotMC:</p>
+						<a href="https://hotmc.ru/vote-195604" onclick="window.open('https://hotmc.ru/vote-195604'); return false;">
+							<img src="widget_vote.png" alt="Голосовать за сервер на HotMC" title="Голосовать за сервер на HotMC" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<p></p>
+			<hr>
+		</div>
+    </main>
+    <footer>
+		<div class="footer-text">
+			&copy; 2024 Sylendor Minecraft Server
+		</div>
+	</footer>
+</body>
+</html>
